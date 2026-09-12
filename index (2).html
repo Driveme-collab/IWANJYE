@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iwanjye — Automation for your everyday life</title>
+<meta name="description" content="Iwanjye sets up automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups — so your attention goes where it's actually needed.">
+
+<!-- Favicon: dark tile with brass dot, matching the site's logo mark -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312151A'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23C9A66B'/%3E%3C/svg%3E">
+
+<!-- Open Graph / link previews (WhatsApp, Instagram, iMessage) -->
+<meta property="og:title" content="Iwanjye — Automation for your everyday life">
+<meta property="og:description" content="Automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://driveme-collab.github.io/IWANJYE/">
+
+<!-- Twitter/X card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Iwanjye — Automation for your everyday life">
+<meta name="twitter:description" content="Automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12151A;
+    --panel: #1B1F27;
+    --panel-2: #20242D;
+    --accent: #C9A66B;
+    --accent-soft: rgba(201,166,107,0.14);
+    --text: #EDEBE6;
+    --muted: #8B8F98;
+    --line: rgba(237,235,230,0.09);
+    --radius: 3px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.12;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .logo-mark{
+    width:9px; height:9px;
+    background:var(--accent);
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    font-size:14px;
+    padding:10px 20px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    color:var(--text);
+    transition:border-color .2s ease;
+  }
+  .nav-cta:hover{border-color:var(--accent);}
+  .nav-mobile-links{display:none;}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:96px 0 110px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  .eyebrow-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:22px;
+  }
+  .eyebrow-line .rule{
+    width:28px; height:1px;
+    background:var(--muted);
+  }
+  h1.headline{
+    font-size:52px;
+    max-width:560px;
+    margin-bottom:24px;
+  }
+  h1.headline em{
+    font-style:italic;
+    color:var(--accent);
+  }
+  .hero-sub{
+    font-size:17px;
+    color:var(--muted);
+    max-width:440px;
+    margin-bottom:36px;
+  }
+  .cta-row{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#12151A;
+    padding:14px 26px;
+    font-size:14.5px;
+    font-weight:600;
+    border-radius:var(--radius);
+    display:inline-block;
+  }
+  .btn-secondary{
+    padding:14px 22px;
+    font-size:14.5px;
+    color:var(--text);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+  .btn-secondary:hover{border-color:var(--accent);}
+
+  /* ---------- Ledger (hero visual) ---------- */
+  .ledger{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .ledger-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  .ledger-head .dot-live{
+    width:6px; height:6px;
+    background:#7FBF8A;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:7px;
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+  .ledger-body{
+    padding:6px 0;
+    max-height:392px;
+  }
+  .ledger-row{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:14px 20px;
+    border-bottom:1px solid var(--line);
+    opacity:0;
+    animation:rowIn .5s ease forwards;
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-check{
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--accent-soft);
+    border:1px solid var(--accent);
+    flex-shrink:0;
+    margin-top:2px;
+    position:relative;
+  }
+  .ledger-check::after{
+    content:"";
+    position:absolute;
+    left:4px; top:2px;
+    width:4px; height:7px;
+    border:solid var(--accent);
+    border-width:0 1.5px 1.5px 0;
+    transform:rotate(45deg);
+  }
+  .ledger-text{flex:1;}
+  .ledger-title{font-size:14px; margin-bottom:2px;}
+  .ledger-time{font-size:12px; color:var(--muted);}
+
+  @keyframes rowIn{
+    from{opacity:0; transform:translateY(6px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    max-width:560px;
+    margin-bottom:56px;
+  }
+  .section-head .kicker{
+    color:var(--accent);
+    font-size:13px;
+    margin-bottom:14px;
+  }
+  .section-head h2{
+    font-size:34px;
+    margin-bottom:16px;
+  }
+  .section-head p{
+    color:var(--muted);
+    font-size:16px;
+  }
+
+  /* ---------- Problem / trade ---------- */
+  .trade-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .trade-col{
+    background:var(--bg);
+    padding:36px 40px;
+  }
+  .trade-col h3{
+    font-size:15px;
+    font-weight:600;
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--muted);
+    margin-bottom:20px;
+  }
+  .trade-col ul{list-style:none;}
+  .trade-col li{
+    font-size:15.5px;
+    padding:11px 0;
+    border-top:1px solid var(--line);
+  }
+  .trade-col li:first-of-type{border-top:none;}
+  .trade-col.now li{color:var(--muted);}
+  .trade-col.after li{color:var(--text);}
+
+  /* ---------- How it works ---------- */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:40px;
+  }
+  .step{
+    padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+  .step-num{
+    font-family:'Fraunces', serif;
+    font-size:14px;
+    color:var(--accent);
+    margin-bottom:16px;
+  }
+  .step h3{
+    font-size:19px;
+    font-weight:500;
+    margin-bottom:10px;
+  }
+  .step p{
+    font-size:14.5px;
+    color:var(--muted);
+  }
+
+  /* ---------- Examples ---------- */
+  .examples-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .example-card{
+    background:var(--panel);
+    padding:30px 28px;
+    transition:background .25s ease;
+  }
+  .example-card:hover{background:var(--panel-2);}
+  .example-card .tag{
+    font-size:12px;
+    color:var(--accent);
+    margin-bottom:14px;
+  }
+  .example-card .tag.tag-soon{
+    display:inline-block;
+    color:var(--muted);
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:11px;
+  }
+  .example-card h3{
+    font-size:17px;
+    font-weight:500;
+    margin-bottom:8px;
+  }
+  .example-card p{
+    font-size:14px;
+    color:var(--muted);
+  }
+
+  /* ---------- Quote / trust strip ---------- */
+  .trust{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:56px 0;
+  }
+  .trust blockquote{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    font-weight:400;
+    max-width:680px;
+    line-height:1.4;
+  }
+  .trust cite{
+    display:block;
+    margin-top:20px;
+    font-style:normal;
+    font-size:14px;
+    color:var(--muted);
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    text-align:left;
+    padding:110px 0 120px;
+  }
+  .final-cta h2{
+    font-size:38px;
+    max-width:560px;
+    margin-bottom:20px;
+  }
+  .final-cta p{
+    color:var(--muted);
+    max-width:440px;
+    margin-bottom:34px;
+    font-size:16px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  footer .logo{font-size:16px;}
+  footer .foot-links{
+    display:flex;
+    gap:28px;
+    font-size:13.5px;
+    color:var(--muted);
+  }
+  footer .foot-links a:hover{color:var(--text);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .wrap{padding:0 22px;}
+    .nav-links{display:none;}
+    header.hero{padding:56px 0 70px;}
+    .hero-grid{grid-template-columns:1fr; gap:44px;}
+    h1.headline{font-size:38px;}
+    .trade-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr; gap:30px;}
+    .examples-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+    .section-head h2{font-size:27px;}
+    .final-cta h2{font-size:29px;}
+    .trust blockquote{font-size:21px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ledger-row{animation:none; opacity:1;}
+    .ledger-head .dot-live{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="logo-mark"></span>Iwanjye</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#examples">What it handles</a>
+      <a href="#roadmap">What's coming</a>
+      <a href="#start">Get started</a>
+    </div>
+    <a href="#start" class="nav-cta">Start free</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-line"><span class="rule"></span>Personal automation, built for how you actually live</div>
+      <h1 class="headline">The busywork gets done <em>before</em> you notice it's there.</h1>
+      <p class="hero-sub">Iwanjye sets up automations that handle the repeating parts of your week — replies, reminders, bookings, follow-ups — over WhatsApp, with a real person checking anything that matters. No app to learn, no card required.</p>
+      <div class="cta-row">
+        <a href="#start" class="btn-primary">Start with one automation</a>
+        <a href="#how" class="btn-secondary">See how it works</a>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-head">
+        <span><span class="dot-live"></span>Running in the background</span>
+        <span>Today</span>
+      </div>
+      <div class="ledger-body" id="ledgerBody"></div>
+    </div>
+  </div>
+</header>
+
+<section class="trade" id="trade">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The trade</div>
+      <h2>You keep the decisions. It keeps the schedule.</h2>
+      <p>Most of what fills up a week isn't hard — it's just repetitive. Iwanjye takes over the repetitive part and leaves the decisions to you.</p>
+    </div>
+    <div class="trade-grid">
+      <div class="trade-col now">
+        <h3>Without Iwanjye</h3>
+        <ul>
+          <li>You re-type the same reply to routine messages</li>
+          <li>Bills get paid the day they're due, or late</li>
+          <li>Appointments get rebooked manually, every time</li>
+          <li>Sunday goes to catching up on what slipped</li>
+        </ul>
+      </div>
+      <div class="trade-col after">
+        <h3>With Iwanjye</h3>
+        <ul>
+          <li>Routine messages get sorted and answered for you</li>
+          <li>Bills are tracked with a reminder days ahead</li>
+          <li>Recurring bookings renew themselves</li>
+          <li>Sunday starts with a short summary, nothing missed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">How it works</div>
+      <h2>Three conversations, then it runs on its own.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Tell us what eats your time</h3>
+        <p>A short call or message — the tasks you keep repeating, and where they usually happen (email, WhatsApp, calendar, forms).</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We build the automation</h3>
+        <p>We set it up, test it against real examples from your week, and walk you through exactly what it will and won't do.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>It runs, you check in when you want</h3>
+        <p>Every automation comes with a plain-language log, so you always know what happened without having to ask.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What it handles</div>
+      <h2>Built around what actually repeats.</h2>
+      <p>These are real starting points. Most people begin with one and add more once it's proven itself.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="tag">Inbox</div>
+        <h3>Sorts and replies to routine messages</h3>
+        <p>Common questions get answered in your voice; anything unusual is flagged for you instead of guessed at.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag">Bills</div>
+        <h3>Tracks due dates and reminds you early</h3>
+        <p>Pulls recurring payments into one place with a reminder a few days out, not the morning of.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag">Bookings</div>
+        <h3>Handles recurring appointments</h3>
+        <p>Rebooks the things you do every week or month, and reschedules automatically when something conflicts.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag">Follow-ups</div>
+        <h3>Chases replies so you don't have to</h3>
+        <p>Sends a polite nudge when someone hasn't responded, on the schedule you'd normally have to remember yourself.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag">Weekly summary</div>
+        <h3>Sends a short recap every Sunday</h3>
+        <p>What got handled automatically, what needs your input, and what's coming up next week.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag">Something else</div>
+        <h3>Tell us what repeats in your week</h3>
+        <p>If it happens the same way more than twice, there's a good chance it can run on its own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What's coming</div>
+      <h2>Built for how Rwanda actually runs, not ported from somewhere else.</h2>
+      <p>Most AI assistants assume a card, an app, and English. Iwanjye is being built around WhatsApp, mobile money, and Kinyarwanda from the ground up.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="tag tag-soon">Voice · Coming soon</div>
+        <h3>Set up automations by voice note, in Kinyarwanda</h3>
+        <p>Describe what you want handled the way you'd normally explain it to a person — no typing, no forms.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag tag-soon">Payments · Coming soon</div>
+        <h3>Bills paid automatically through Mobile Money</h3>
+        <p>Set a limit once, and recurring bills get paid on their own — not just flagged for you to handle.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag tag-soon">Trust · In every phase</div>
+        <h3>A person reviews anything that matters</h3>
+        <p>Payments and sensitive replies are checked by a real person before they go out — automation with a second pair of eyes.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag tag-soon">Diaspora · Coming soon</div>
+        <h3>Support family back home, automatically</h3>
+        <p>Rent, school fees, and electricity for family in Rwanda handled monthly, with a plain-language log sent back to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <blockquote>
+      "I stopped noticing the small stuff — which is exactly the point. It just gets done."
+      <cite>Early user, Kigali</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="final-cta" id="start">
+  <div class="wrap">
+    <h2>Pick one thing that repeats. Let's automate it first.</h2>
+    <p>No long setup, no commitment beyond the first automation. If it doesn't save you real time, you don't continue.</p>
+    <div class="cta-row">
+      <a href="https://wa.me/250788536881" class="btn-primary" target="_blank" rel="noopener">Start on WhatsApp</a>
+      <a href="mailto:lifedeskrw@gmail.com" class="btn-secondary">Send us an email instead</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><span class="logo-mark"></span>Iwanjye</div>
+    <div class="foot-links">
+      <a href="#how">How it works</a>
+      <a href="#examples">What it handles</a>
+      <a href="#start">Get started</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const items = [
+    { title: "Replied to 4 routine emails", time: "9:02 AM" },
+    { title: "Rebooked weekly appointment", time: "9:15 AM" },
+    { title: "Reminded you: rent due in 3 days", time: "10:40 AM" },
+    { title: "Followed up on unanswered message", time: "12:05 PM" },
+    { title: "Sorted 11 new emails into folders", time: "1:30 PM" },
+    { title: "Confirmed tomorrow's appointment", time: "3:47 PM" },
+  ];
+  const body = document.getElementById('ledgerBody');
+  items.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'ledger-row';
+    row.style.animationDelay = (i * 0.12) + 's';
+    row.innerHTML = `
+      <div class="ledger-check"></div>
+      <div class="ledger-text">
+        <div class="ledger-title">${item.title}</div>
+        <div class="ledger-time">${item.time}</div>
+      </div>`;
+    body.appendChild(row);
+  });
+</script>
+
+</body>
+</html>
