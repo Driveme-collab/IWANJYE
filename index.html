@@ -4,6 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Iwanjye — Automation for your everyday life</title>
+<meta name="description" content="Iwanjye sets up automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups — so your attention goes where it's actually needed.">
+
+<!-- Favicon: dark tile with brass dot, matching the site's logo mark -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312151A'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23C9A66B'/%3E%3C/svg%3E">
+
+<!-- Open Graph / link previews (WhatsApp, Instagram, iMessage) -->
+<meta property="og:title" content="Iwanjye — Automation for your everyday life">
+<meta property="og:description" content="Automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://driveme-collab.github.io/IWANJYE/">
+
+<!-- Twitter/X card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Iwanjye — Automation for your everyday life">
+<meta name="twitter:description" content="Automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -317,6 +333,15 @@
     color:var(--accent);
     margin-bottom:14px;
   }
+  .example-card .tag.tag-soon{
+    display:inline-block;
+    color:var(--muted);
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:11px;
+  }
   .example-card h3{
     font-size:17px;
     font-weight:500;
@@ -325,6 +350,65 @@
   .example-card p{
     font-size:14px;
     color:var(--muted);
+  }
+
+  /* ---------- Pricing ---------- */
+  .pricing-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .pricing-row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:24px;
+    padding:24px 28px;
+    border-bottom:1px solid var(--line);
+  }
+  .pricing-row:last-child{border-bottom:none;}
+  .pricing-label{
+    font-size:13px;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .pricing-value{
+    font-size:15.5px;
+    color:var(--text);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{
+    max-width:720px;
+  }
+  .faq-item{
+    border-top:1px solid var(--line);
+    padding:18px 0;
+  }
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    cursor:pointer;
+    font-size:16px;
+    font-weight:500;
+    list-style:none;
+    position:relative;
+    padding-right:28px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";
+    position:absolute;
+    right:0;
+    top:0;
+    color:var(--accent);
+    font-size:18px;
+  }
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{
+    margin-top:12px;
+    font-size:14.5px;
+    color:var(--muted);
+    max-width:600px;
   }
 
   /* ---------- Quote / trust strip ---------- */
@@ -346,6 +430,50 @@
     font-style:normal;
     font-size:14px;
     color:var(--muted);
+  }
+
+  /* ---------- Intake form ---------- */
+  .intake-form{
+    max-width:480px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:28px;
+    margin-top:8px;
+  }
+  .form-row{
+    margin-bottom:16px;
+  }
+  .form-row label{
+    display:block;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea{
+    width:100%;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:11px 12px;
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14.5px;
+  }
+  .form-row textarea{resize:vertical;}
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+  }
+  .form-submit{
+    width:100%;
+    border:none;
+    cursor:pointer;
+    margin-top:4px;
   }
 
   /* ---------- Final CTA ---------- */
@@ -400,6 +528,8 @@
     .section-head h2{font-size:27px;}
     .final-cta h2{font-size:29px;}
     .trust blockquote{font-size:21px;}
+    .pricing-row{grid-template-columns:1fr; gap:6px;}
+    .intake-form{max-width:100%; padding:22px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -416,6 +546,9 @@
     <div class="nav-links">
       <a href="#how">How it works</a>
       <a href="#examples">What it handles</a>
+      <a href="#roadmap">What's coming</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
       <a href="#start">Get started</a>
     </div>
     <a href="#start" class="nav-cta">Start free</a>
@@ -425,9 +558,9 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow-line"><span class="rule"></span>Personal automation, done for you</div>
+      <div class="eyebrow-line"><span class="rule"></span>Personal automation, built for how you actually live</div>
       <h1 class="headline">The busywork gets done <em>before</em> you notice it's there.</h1>
-      <p class="hero-sub">Iwanjye sets up automations that handle the repeating parts of your week — replies, reminders, bookings, follow-ups — so your attention goes to the things that actually need it.</p>
+      <p class="hero-sub">Iwanjye sets up automations that handle the repeating parts of your week — replies, reminders, bookings, follow-ups — over WhatsApp, with a real person checking anything that matters. No app to learn, no card required.</p>
       <div class="cta-row">
         <a href="#start" class="btn-primary">Start with one automation</a>
         <a href="#how" class="btn-secondary">See how it works</a>
@@ -542,6 +675,62 @@
   </div>
 </section>
 
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What's coming</div>
+      <h2>Built for how Rwanda actually runs, not ported from somewhere else.</h2>
+      <p>Most AI assistants assume a card, an app, and English. Iwanjye is being built around WhatsApp, mobile money, and Kinyarwanda from the ground up.</p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="tag tag-soon">Voice · Coming soon</div>
+        <h3>Set up automations by voice note, in Kinyarwanda</h3>
+        <p>Describe what you want handled the way you'd normally explain it to a person — no typing, no forms.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag tag-soon">Payments · Coming soon</div>
+        <h3>Bills paid automatically through Mobile Money</h3>
+        <p>Set a limit once, and recurring bills get paid on their own — not just flagged for you to handle.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag tag-soon">Trust · In every phase</div>
+        <h3>A person reviews anything that matters</h3>
+        <p>Payments and sensitive replies are checked by a real person before they go out — automation with a second pair of eyes.</p>
+      </div>
+      <div class="example-card">
+        <div class="tag tag-soon">Diaspora · Coming soon</div>
+        <h3>Support family back home, automatically</h3>
+        <p>Rent, school fees, and electricity for family in Rwanda handled monthly, with a plain-language log sent back to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Pricing</div>
+      <h2>We're finding the right price with our first users, not guessing at launch.</h2>
+      <p>Rather than lock in a number before anyone's actually used it, pricing is being tested honestly with the first people who join.</p>
+    </div>
+    <div class="pricing-panel">
+      <div class="pricing-row">
+        <div class="pricing-label">Your first automation</div>
+        <div class="pricing-value">Free, while we validate the model together</div>
+      </div>
+      <div class="pricing-row">
+        <div class="pricing-label">After that</div>
+        <div class="pricing-value">A fair price we agree on — pay-per-automation or a small monthly fee, whichever fits how you actually use it</div>
+      </div>
+      <div class="pricing-row">
+        <div class="pricing-label">Payment method</div>
+        <div class="pricing-value">No card needed — built around Mobile Money, when automated payments go live</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="trust">
   <div class="wrap">
     <blockquote>
@@ -551,13 +740,75 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Questions</div>
+      <h2>What people usually ask before starting.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Is my information safe?</summary>
+        <p>Yes. Messages go through WhatsApp, which is already end-to-end encrypted. Nothing is sold to third parties, and a real person — not just an AI — reviews anything sensitive before it goes out.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need to pay before it works?</summary>
+        <p>No. Your first automation is free while we're testing the model with early users. You'll know exactly what it costs, if anything, before you're asked to pay.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What if it doesn't do what I actually asked?</summary>
+        <p>A person checks how it's set up against real examples from your week before it runs, and you can adjust it any time it's not quite right.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need to install an app?</summary>
+        <p>No — everything currently runs over WhatsApp, which you already have. Voice-note setup in Kinyarwanda is coming, also without needing a new app.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does Iwanjye hold or manage my money?</summary>
+        <p>No. Iwanjye doesn't hold your funds. Automated Mobile Money payments are still coming — for now, any payment-related automation is reminders only, reviewed by a person.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I stop anytime?</summary>
+        <p>Yes — there's no lock-in or long contract. If an automation isn't saving you real time, you simply stop it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
 <section class="final-cta" id="start">
   <div class="wrap">
     <h2>Pick one thing that repeats. Let's automate it first.</h2>
     <p>No long setup, no commitment beyond the first automation. If it doesn't save you real time, you don't continue.</p>
-    <div class="cta-row">
-      <a href="https://wa.me/250788536881" class="btn-primary" target="_blank" rel="noopener">Start on WhatsApp</a>
-      <a href="mailto:lifedeskrw@gmail.com" class="btn-secondary">Send us an email instead</a>
+
+    <div class="intake-form">
+      <div class="form-row">
+        <label for="f-name">Your name</label>
+        <input type="text" id="f-name" placeholder="e.g. Aline">
+      </div>
+      <div class="form-row">
+        <label for="f-phone">WhatsApp number</label>
+        <input type="tel" id="f-phone" placeholder="e.g. 078...">
+      </div>
+      <div class="form-row">
+        <label for="f-task">What do you want automated?</label>
+        <select id="f-task">
+          <option value="Sorting and replying to routine messages">Inbox — sorting and replying to routine messages</option>
+          <option value="Tracking bills and sending reminders">Bills — tracking due dates and reminders</option>
+          <option value="Handling a recurring booking or appointment">Bookings — a recurring appointment</option>
+          <option value="Following up on unanswered messages">Follow-ups — chasing replies</option>
+          <option value="A weekly summary of what got handled">Weekly summary</option>
+          <option value="Something else">Something else</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="f-details">Anything else to add? (optional)</label>
+        <textarea id="f-details" rows="2" placeholder="A short example of what usually happens"></textarea>
+      </div>
+      <button type="button" class="btn-primary form-submit" onclick="sendToWhatsApp()">Send via WhatsApp</button>
+    </div>
+
+    <div class="cta-row" style="margin-top:20px;">
+      <a href="mailto:lifedeskrw@gmail.com" class="btn-secondary">Prefer email instead</a>
     </div>
   </div>
 </section>
@@ -567,7 +818,8 @@
     <div class="logo"><span class="logo-mark"></span>Iwanjye</div>
     <div class="foot-links">
       <a href="#how">How it works</a>
-      <a href="#examples">What it handles</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
       <a href="#start">Get started</a>
     </div>
   </div>
@@ -595,6 +847,26 @@
       </div>`;
     body.appendChild(row);
   });
+
+  function sendToWhatsApp() {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const task = document.getElementById('f-task').value;
+    const details = document.getElementById('f-details').value.trim();
+
+    if (!name || !phone) {
+      alert('Please add your name and WhatsApp number so we can reach you.');
+      return;
+    }
+
+    let message = `Hi Iwanjye, I'd like to start an automation.\n\nName: ${name}\nWhatsApp: ${phone}\nWhat I want automated: ${task}`;
+    if (details) {
+      message += `\nDetails: ${details}`;
+    }
+
+    const url = `https://wa.me/250788536881?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
 </script>
 
 </body>
