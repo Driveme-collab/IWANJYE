@@ -7,7 +7,7 @@
 <meta name="description" content="Iwanjye sets up automations that quietly handle the repeating parts of your week — replies, reminders, bookings, follow-ups — so your attention goes where it's actually needed.">
 
 <!-- Favicon: dark tile with brass dot, matching the site's logo mark -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312151A'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23C9A66B'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23161311'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23A63A2C'/%3E%3C/svg%3E">
 
 <!-- Open Graph / link previews (WhatsApp, Instagram, iMessage) -->
 <meta property="og:title" content="Iwanjye — Automation for your everyday life">
@@ -24,14 +24,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #12151A;
-    --panel: #1B1F27;
-    --panel-2: #20242D;
-    --accent: #C9A66B;
-    --accent-soft: rgba(201,166,107,0.14);
-    --text: #EDEBE6;
-    --muted: #8B8F98;
-    --line: rgba(237,235,230,0.09);
+    --bg: #161311;
+    --panel: #211C19;
+    --panel-2: #29221E;
+    --accent: #A63A2C;
+    --accent-soft: rgba(166,58,44,0.16);
+    --text: #EDE6DD;
+    --muted: #9C9187;
+    --line: rgba(237,230,221,0.10);
     --radius: 3px;
   }
 
@@ -108,6 +108,15 @@
   /* ---------- Hero ---------- */
   header.hero{
     padding:96px 0 110px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M0 0 L28 0 L14 24 Z' fill='%23A63A2C' fill-opacity='0.06'/%3E%3Cpath d='M28 0 L56 0 L42 24 Z' fill='%23A63A2C' fill-opacity='0.06'/%3E%3Cpath d='M14 24 L42 24 L28 48 Z' fill='%23A63A2C' fill-opacity='0.04'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+  .zigzag-divider{
+    height:14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M0 0 L14 14 L28 0 Z' fill='%23A63A2C'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 28px 14px;
+    opacity: 0.85;
   }
   .hero-grid{
     display:grid;
@@ -576,6 +585,8 @@
     </div>
   </div>
 </header>
+
+<div class="zigzag-divider" role="presentation"></div>
 
 <section class="trade" id="trade">
   <div class="wrap">
